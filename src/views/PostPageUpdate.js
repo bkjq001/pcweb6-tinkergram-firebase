@@ -74,7 +74,7 @@ export default function PostPageUpdate() {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="comment">
-            <Form.Label>Caption</Form.Label>
+            <Form.Label>Comment</Form.Label>
             <Form.Control
               type="text"
               placeholder="Lovely day"
