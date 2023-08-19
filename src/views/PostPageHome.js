@@ -23,7 +23,7 @@ export default function PostPageHome() {
     getAllPosts();
   }, []);
 
-  const ImagesRow = () => {
+ const ImagesRow = () => {
     return posts.map((post, index) => <ImageSquare key={index} post={post} />);
   };
 
@@ -64,6 +64,10 @@ function ImageSquare({ post }) {
           objectFit: "cover",
           width: "18rem",
           height: "18rem",
+          border:"solid",
+          borderColor:"#eee",
+          borderWidth: "1px",
+          borderRadius: "5px"
         }}
       />
     </Link>
