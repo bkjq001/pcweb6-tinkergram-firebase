@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Image, Nav, Navbar, Row } from "react-bootstrap";
+import { Card, Container, Image, Nav, Navbar, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase";
@@ -48,14 +48,21 @@ export default function PostPageHome() {
 }
 
 function ImageSquare({ post }) {
-  const { image, id } = post;
+  const { image, id, comment,  } = post;
   return (
+    
     <Link
       to={`post/${id}`}
       style={{
-        width: "18rem",
+        width: "20rem",
         marginLeft: "1rem",
         marginTop: "2rem",
+        border:"solid",
+        borderColor:"#eee",
+        borderWidth: "1px",
+        borderRadius: "5px",
+        padding: "1rem",
+
       }}
     >
       <Image
@@ -64,12 +71,17 @@ function ImageSquare({ post }) {
           objectFit: "cover",
           width: "18rem",
           height: "18rem",
-          border:"solid",
-          borderColor:"#eee",
-          borderWidth: "1px",
-          borderRadius: "5px"
+          
         }}
       />
+      <Card.Text
+      style={{
+        padding:"1rem",
+      }}
+      >{comment}</Card.Text>
+            
     </Link>
+    
+       
   );
 }

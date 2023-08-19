@@ -10,6 +10,7 @@ import { ref, uploadBytes, getDownloadURL, deleteObject} from "firebase/storage"
 export default function PostPageUpdate() {
   const params = useParams();
   const id = params.id;
+  const [comment, setComment] = useState("");
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
@@ -30,13 +31,14 @@ export default function PostPageUpdate() {
     const response = await uploadBytes(imageReference, image);
     imageURL = await getDownloadURL(response.ref);
     }
-    await updateDoc(doc(db, "posts",id), {caption, image: imageURL });
+    await updateDoc(doc(db, "posts",id), {comment, caption, image: imageURL });
     navigate("/");
   }
 
   async function getPost(id) {
     const postDocument = await getDoc(doc(db, "posts", id));
     const post = postDocument.data();
+    setComment(post.comment);
     setCaption(post.caption);
     setPreviewImage(post.image);
     setImageName(post.imageName);
@@ -69,6 +71,15 @@ export default function PostPageUpdate() {
               placeholder="Lovely day"
               value={caption}
               onChange={(text) => setCaption(text.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="comment">
+            <Form.Label>Caption</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Lovely day"
+              value={comment}
+              onChange={(text) => setComment(text.target.value)}
             />
           </Form.Group>
         <Image

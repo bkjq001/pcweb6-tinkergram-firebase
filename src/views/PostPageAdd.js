@@ -9,6 +9,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function PostPageAdd() {
   const [user, loading] = useAuthState(auth);
+  const [comment, setComment] = useState("");
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("https://zca.sg/img/placeholder");
@@ -25,8 +26,8 @@ export default function PostPageAdd() {
     // Add the document to cloud firestore
     
     
-  await addDoc(collection (db, "posts"), {
-      caption, image: imageUrl, imageName: image.name 
+  await addDoc(collection (db, "posts"), { 
+    comment, caption, image: imageUrl, imageName: image.name 
     });
     navigate("/");
   }
@@ -58,6 +59,15 @@ export default function PostPageAdd() {
               placeholder="Lovely day"
               value={caption}
               onChange={(text) => setCaption(text.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="comment">
+            <Form.Label>Comment</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Lovely day"
+              value={comment}
+              onChange={(text) => setComment(text.target.value)}
             />
           </Form.Group>
           <Image

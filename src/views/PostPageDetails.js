@@ -9,6 +9,7 @@ import { ref, deleteObject } from "firebase/storage";
 
 export default function PostPageDetails() {
   const [caption, setCaption] = useState("");
+  const [comment, setComment] = useState("");
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
   const params = useParams();
@@ -36,6 +37,7 @@ export default function PostPageDetails() {
     const postDocument = await getDoc(doc(db, "posts", id));
     const post = postDocument.data();
     setCaption(post.caption);
+    setComment(post.comment);
     setImage(post.image);
     setImageName(post.imageName);
   }
@@ -66,6 +68,7 @@ export default function PostPageDetails() {
             <Card>
               <Card.Body>
                 <Card.Text>{caption}</Card.Text>
+                <Card.Text style={{ fontStyle: "italic" }}>{comment}</Card.Text>
                 <Card.Link href={`/update/${id}`}>Edit</Card.Link>
                 <Card.Link
                   onClick={() => deletePost(id)}
