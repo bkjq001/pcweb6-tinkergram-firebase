@@ -5,6 +5,8 @@ import SignUpPage from "./views/SignUpPage";
 import PostPageAdd from "./views/PostPageAdd";
 import PostPageDetails from "./views/PostPageDetails";
 import PostPageUpdate from "./views/PostPageUpdate";
+import './index.css'
+
 
 function App() {
   return (

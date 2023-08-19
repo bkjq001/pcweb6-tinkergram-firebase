@@ -1,0 +1,13 @@
+// Override default variables before the import
+
+.navbar-brand {
+    font-family: 'Pacifico', cursive;
+}
+
+.navbar{
+    --bs-navbar-brand-font-size:2rem!important;
+}
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
