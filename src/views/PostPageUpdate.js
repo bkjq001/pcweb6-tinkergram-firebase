@@ -11,6 +11,7 @@ export default function PostPageUpdate() {
   const params = useParams();
   const id = params.id;
   const [comment, setComment] = useState("");
+  const [startdate, setStartdate] = useState("");
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
@@ -39,6 +40,7 @@ export default function PostPageUpdate() {
     const postDocument = await getDoc(doc(db, "posts", id));
     const post = postDocument.data();
     setComment(post.comment);
+    setStartdate(post.startdate);
     setCaption(post.caption);
     setPreviewImage(post.image);
     setImageName(post.imageName);
@@ -54,7 +56,7 @@ export default function PostPageUpdate() {
     <div>
       <Navbar variant="light" bg="light">
         <Container>
-          <Navbar.Brand href="/">Tinkergram</Navbar.Brand>
+          <Navbar.Brand href="/">⭕ The Giving Circle</Navbar.Brand>
           <Nav>
             <Nav.Link href="/add">New Post</Nav.Link>
             <Nav.Link onClick={() => signOut(auth)}>🚪</Nav.Link>
@@ -62,24 +64,34 @@ export default function PostPageUpdate() {
         </Container>
       </Navbar>
       <Container>
-        <h1 style={{ marginBlock: "1rem" }}>Update Post</h1>
+        <h1 style={{ marginBlock: "1rem" }}>Update Event</h1>
         <Form>
           <Form.Group className="mb-3" controlId="caption">
-            <Form.Label>Caption</Form.Label>
+            <Form.Label>Event Title</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Lovely day"
+              placeholder="Event Title"
               value={caption}
               onChange={(text) => setCaption(text.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="comment">
-            <Form.Label>Comment</Form.Label>
+            <Form.Label>Description</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Lovely day"
+              as="textarea"
+              rows={4}
+              placeholder="Description"
               value={comment}
               onChange={(text) => setComment(text.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="startdate">
+            <Form.Label>Start Date</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Description"
+              value={startdate}
+              onChange={(startdate) => setStartdate(startdate.target.value)}
             />
           </Form.Group>
         <Image

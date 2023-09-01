@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Nav, Navbar, Image } from "react-bootstrap";
+import { Button, Container, Form, Nav, Navbar, Image, Row, Col, Stack} from "react-bootstrap";
 import { addDoc, collection } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom" ;
@@ -10,9 +10,15 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 export default function PostPageAdd() {
   const [user, loading] = useAuthState(auth);
   const [comment, setComment] = useState("");
+  const [startdate, setStartdate] = useState("");
+  const [enddate, setEnddate] = useState("");
+  const [starttime, setStarttime] = useState("");
+  const [endtime, setEndtime] = useState("");
   const [caption, setCaption] = useState("");
+  const [location, setLocation] = useState("");
+  const [requirements, setRequirements] = useState("");
   const [image, setImage] = useState("");
-  const [previewImage, setPreviewImage] = useState("https://zca.sg/img/placeholder");
+  const [previewImage, setPreviewImage] = useState("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png");
   const navigate = useNavigate();
 
   async function addPost() {
@@ -27,7 +33,7 @@ export default function PostPageAdd() {
     
     
   await addDoc(collection (db, "posts"), { 
-    comment, caption, image: imageUrl, imageName: image.name 
+    comment, startdate, enddate, starttime, endtime, caption, location, requirements, image: imageUrl, imageName: image.name 
     });
     navigate("/");
   }
@@ -42,7 +48,7 @@ export default function PostPageAdd() {
     <>
       <Navbar variant="light" bg="light">
         <Container>
-          <Navbar.Brand href="/">Tinkergram</Navbar.Brand>
+          <Navbar.Brand href="/">⭕ The Giving Circle</Navbar.Brand>
           <Nav>
             <Nav.Link href="/add">New Post</Nav.Link>
             <Nav.Link onClick={() => signOut(auth)}>🚪</Nav.Link>
@@ -50,36 +56,62 @@ export default function PostPageAdd() {
         </Container>
       </Navbar>
       <Container>
-        <h1 style={{ marginBlock: "1rem" }}>Add Post</h1>
+        <h1 style={{ marginBlock: "1rem" }}>Add Event</h1>
         <Form>
+          <Row><Col md={6}>
           <Form.Group className="mb-3" controlId="caption">
-            <Form.Label>Caption</Form.Label>
+            <Form.Label>Event Name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Lovely day"
+              placeholder=""
               value={caption}
               onChange={(text) => setCaption(text.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="comment">
-            <Form.Label>Comment</Form.Label>
+            <Form.Label>Brief Description</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Lovely day"
+              as="textarea"
+              rows={3}
+              placeholder=""
               value={comment}
-              onChange={(text) => setComment(text.target.value)}
+              onChange={(comment) => setComment(comment.target.value)}
             />
           </Form.Group>
-          <Image
+          <Form.Group className="mb-3" controlId="location">
+            <Form.Label>Event Location</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder=""
+              value={location}
+              onChange={(location) => setLocation(location.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="requirements">
+            <Form.Label>Requirements</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={5}
+              placeholder=""
+              value={requirements}
+              onChange={(requirements) => setRequirements(requirements.target.value)}
+            />
+          </Form.Group>
+          </Col>
+          
+          <Col md={4}>
+          <Stack>
+          <Form.Label>Upload Event Image</Form.Label>
+          <Image className="mb-3"
             src={previewImage}
             style={{
               objectFit: "cover",
-              width: "10rem",
-              height: "10rem",
+              width: "25rem",
+              height: "20rem",
             }}
             />
-          <Form.Group className="mb-3" controlId="image">
-            <Form.Label>Image URL</Form.Label>
+            <Form.Group className="mb-3" controlId="image">
+            <Form.Label></Form.Label>
             <Form.Control
               type="file"
               onChange={(e) => {
@@ -94,9 +126,59 @@ export default function PostPageAdd() {
               Make sure the url has a image type at the end: jpg, jpeg, png.
             </Form.Text>
           </Form.Group>
-          <Button variant="primary" onClick={async (e) => addPost()}>
+          </Stack>
+          </Col>
+          </Row>
+          
+          
+          <h3>Event Dates & Time</h3>
+            <Row>
+              <Col md={4}><Form.Group className="mb-3" controlId="startdate">
+            <Form.Label>Start Date</Form.Label>
+            <Form.Control
+              type="date"
+              placeholder="Start Date"
+              value={startdate}
+              onChange={(date) => setStartdate(date.target.value)}
+            />
+          </Form.Group></Col>
+          <Col md={4}><Form.Group className="mb-3" controlId="enddate">
+            <Form.Label>End Date</Form.Label>
+            <Form.Control
+              type="date"
+              placeholder="End Date"
+              value={enddate}
+              onChange={(enddate) => setEnddate(enddate.target.value)}
+            />
+          </Form.Group></Col>
+            </Row>
+            <Row>
+            <Col md={4}><Form.Group className="mb-3" controlId="starttime">
+            <Form.Label>Session Start Time</Form.Label>
+            <Form.Control
+              type="time"
+              placeholder="00:00 AM"
+              value={starttime}
+              onChange={(starttime) => setStarttime(starttime.target.value)}
+            />
+          </Form.Group></Col>
+              
+              <Col md={4}><Form.Group className="mb-3" controlId="endtime">
+            <Form.Label>Session End Time</Form.Label>
+            <Form.Control
+              type="time"
+              placeholder="00:00 AM"
+              value={endtime}
+              onChange={(endtime) => setEndtime(endtime.target.value)}
+            />
+          </Form.Group></Col>
+          
+            </Row>
+            
+          <Button variant="primary" size="lg" onClick={async (e) => addPost()}>
             Submit
           </Button>
+          
         </Form>
       </Container>
     </>

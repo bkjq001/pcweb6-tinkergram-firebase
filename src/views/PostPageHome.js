@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Container, Image, Nav, Navbar, Row } from "react-bootstrap";
+import { Card, Container, Image, Nav, Navbar, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase";
@@ -31,9 +31,9 @@ export default function PostPageHome() {
     <>
       <Navbar variant="light" bg="light">
         <Container>
-          <Navbar.Brand href="/">Tinkergram</Navbar.Brand>
+          <Navbar.Brand href="/">⭕ The Giving Circle</Navbar.Brand>
           <Nav>
-            <Nav.Link href="/add">New Post</Nav.Link>
+            <Nav.Link href="/add">Add an Event</Nav.Link>
             { user && <Nav.Link onClick={() => signOut(auth)}>🚪</Nav.Link>}
           </Nav>
         </Container>
@@ -47,25 +47,20 @@ export default function PostPageHome() {
   );
 }
 
-function ImageSquare({ post }) {
-  const { image, id, comment,  } = post;
-  return (
-    
-    <Link
-      to={`post/${id}`}
-      style={{
-        width: "20rem",
-        marginLeft: "1rem",
-        marginTop: "2rem",
-        border:"solid",
-        borderColor:"#eee",
-        borderWidth: "1px",
-        borderRadius: "5px",
-        padding: "1rem",
 
-      }}
-    >
-      <Image
+function ImageSquare({ post }) {
+  const { image, id, caption, startdate, enddate, comment  } = post;
+  return (
+    <Card style={{
+      width: "22rem",
+      margin: "1rem",
+      border:"solid",
+      borderColor:"#eee",
+      borderWidth: "1px",
+      borderRadius: "5px",
+    }}>
+    <Card.Body>
+    <Image
         src={image}
         style={{
           objectFit: "cover",
@@ -74,13 +69,29 @@ function ImageSquare({ post }) {
           
         }}
       />
-      <Card.Text
-      style={{
-        padding:"1rem",
-      }}
-      >{comment}</Card.Text>
-            
+      <Card.Title style={{
+        paddingTop:"1rem",
+        height:"5rem",
+      }}>{caption}</Card.Title>
+      <Card.Subtitle className="mb-2 text-muted">Dates: {startdate} to {enddate}</Card.Subtitle>
+      <Card.Text className="text-truncate" style={{
+      }}>
+        {comment}
+      </Card.Text>
+
+      <Link
+      to={`post/${id}`}
+    >
+      <Nav className="justify-content-end">
+      <Button variant="primary">
+        Read More
+      </Button>
+      </Nav>
     </Link>
+    </Card.Body>
+  </Card>
+
+    
     
        
   );

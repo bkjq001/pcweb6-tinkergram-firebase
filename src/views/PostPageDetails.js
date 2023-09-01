@@ -52,7 +52,7 @@ export default function PostPageDetails() {
     <>
       <Navbar variant="light" bg="light">
         <Container>
-          <Navbar.Brand href="/">Tinkergram</Navbar.Brand>
+          <Navbar.Brand href="/">⭕ The Giving Circle</Navbar.Brand>
           <Nav>
             <Nav.Link href="/add">New Post</Nav.Link>
             <Nav.Link onClick={() => signOut(auth)}>🚪</Nav.Link>
@@ -67,7 +67,7 @@ export default function PostPageDetails() {
           <Col>
             <Card>
               <Card.Body>
-                <Card.Text>{caption}</Card.Text>
+                <Card.Title>{caption}</Card.Title>
                 <Card.Text style={{ fontStyle: "italic" }}>{comment}</Card.Text>
                 <Card.Link href={`/update/${id}`}>Edit</Card.Link>
                 <Card.Link
