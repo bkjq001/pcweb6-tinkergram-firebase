@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Nav, Navbar, Image, Row, Col, Stack} from "react-bootstrap";
+import { Button, Container, Form, Image, Row, Col, Stack} from "react-bootstrap";
 import { addDoc, collection } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom" ;
@@ -46,15 +46,6 @@ export default function PostPageAdd() {
 
   return (
     <>
-      <Navbar variant="light" bg="light">
-        <Container>
-          <Navbar.Brand href="/">⭕ The Giving Circle</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/add">New Post</Nav.Link>
-            <Nav.Link onClick={() => signOut(auth)}>🚪</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
       <Container>
         <h1 style={{ marginBlock: "1rem" }}>Add Event</h1>
         <Form>
@@ -63,6 +54,7 @@ export default function PostPageAdd() {
             <Form.Label>Event Name</Form.Label>
             <Form.Control
               type="text"
+              maxlength="55"
               placeholder=""
               value={caption}
               onChange={(text) => setCaption(text.target.value)}
@@ -72,6 +64,7 @@ export default function PostPageAdd() {
             <Form.Label>Brief Description</Form.Label>
             <Form.Control
               as="textarea"
+              maxlength = "300" 
               rows={3}
               placeholder=""
               value={comment}

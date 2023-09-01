@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Container, Image, Nav, Navbar, Row, Button } from "react-bootstrap";
+import { Card, Container, Image, Nav, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase";
@@ -7,7 +7,6 @@ import { signOut } from "firebase/auth"
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function PostPageHome() {
-  const [user] = useAuthState(auth);
   const [posts, setPosts] = useState([]);
 
 
@@ -29,15 +28,7 @@ export default function PostPageHome() {
 
   return (
     <>
-      <Navbar variant="light" bg="light">
-        <Container>
-          <Navbar.Brand href="/">⭕ The Giving Circle</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/add">Add an Event</Nav.Link>
-            { user && <Nav.Link onClick={() => signOut(auth)}>🚪</Nav.Link>}
-          </Nav>
-        </Container>
-      </Navbar>
+      
       <Container>
         <Row>
           <ImagesRow />
@@ -48,7 +39,9 @@ export default function PostPageHome() {
 }
 
 
+
 function ImageSquare({ post }) {
+  const [user] = useAuthState(auth);
   const { image, id, caption, startdate, enddate, comment  } = post;
   return (
     <Card style={{
@@ -73,9 +66,9 @@ function ImageSquare({ post }) {
         paddingTop:"1rem",
         height:"5rem",
       }}>{caption}</Card.Title>
+      <Card.Text className="text-muted">Organizer: {user?.displayName}</Card.Text>
       <Card.Subtitle className="mb-2 text-muted">Dates: {startdate} to {enddate}</Card.Subtitle>
-      <Card.Text className="text-truncate" style={{
-      }}>
+      <Card.Text>
         {comment}
       </Card.Text>
 

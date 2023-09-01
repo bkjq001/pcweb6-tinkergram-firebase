@@ -1,17 +1,31 @@
 import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import GoogleButton from 'react-google-button'
+import { UserAuth } from "../context/AuthContext";
+
 
 export default function LoginPage() {
+  const { googleSignIn } = UserAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const handleGoogleSignIn = async () => {
+    try{
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Container>
+      <Row>
+        <Col md={4}>
       <h1 className="my-3">Login to your account</h1>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -37,7 +51,7 @@ export default function LoginPage() {
           />
           <a href="/signup">Sign up for an account</a>
         </Form.Group>
-        <Button variant="primary" onClick={async (e) => {
+        <Button className="mb-3" variant="primary" onClick={async (e) => {
 
             setError("");
             const canLogin = username && password;
@@ -56,6 +70,9 @@ export default function LoginPage() {
           Login
         </Button>
       </Form>
+      <GoogleButton onClick={handleGoogleSignIn}/>
+      </Col>
+      </Row>
       <p>{error}</p>
     </Container>
   );

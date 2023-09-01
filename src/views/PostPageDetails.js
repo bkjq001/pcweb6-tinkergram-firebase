@@ -50,15 +50,6 @@ export default function PostPageDetails() {
 
   return (
     <>
-      <Navbar variant="light" bg="light">
-        <Container>
-          <Navbar.Brand href="/">⭕ The Giving Circle</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/add">New Post</Nav.Link>
-            <Nav.Link onClick={() => signOut(auth)}>🚪</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
       <Container>
         <Row style={{ marginTop: "2rem" }}>
           <Col md="6">
