@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import React, { useState,  } from "react";
+import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase" 
 
 export default function SignUpPage() {
@@ -12,7 +12,9 @@ export default function SignUpPage() {
 
   return (
     <Container>
-      <h1 className="my-3">Sign up for an account</h1>
+      <Row>
+        <Col md={4}>
+        <h1 className="my-3">Sign up for an account</h1>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -35,9 +37,9 @@ export default function SignUpPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <a href="/login">Have an existing account? Login here.</a>
+          <Link to ='/login'>Have an existing account? Login here.</Link>
         </Form.Group>
-        <Button variant="primary" onClick={async (e) => {
+        <Button className="mb-3" variant="primary" onClick={async (e) => {
             setError("");
             const canSignUp = username && password;
             if (canSignUp) {
@@ -51,6 +53,9 @@ export default function SignUpPage() {
             
         }}>Sign Up</Button>
       </Form>
+        </Col>
+      </Row>
+      
       <p>{error}</p>
     </Container>
   );

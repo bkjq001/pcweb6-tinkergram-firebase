@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { UserAuth } from "../context/AuthContext";
 
 
 export default function LoginPage() {
-  const { googleSignIn } = UserAuth();
+  const { googleSignIn, user } = UserAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,6 +21,12 @@ export default function LoginPage() {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if(user !=null) {
+      navigate('/account');
+    }
+  }, [user,navigate]);
 
   return (
     <Container>

@@ -7,7 +7,9 @@ import PostPageAdd from "./views/PostPageAdd";
 import PostPageDetails from "./views/PostPageDetails";
 import PostPageUpdate from "./views/PostPageUpdate";
 import Sitenav from "./components/Navbar";
+import Account from "./views/Account";
 import './index.css'
+import Protected from "./components/Protected";
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
       <Route path="/add" element={<PostPageAdd />} />
       <Route path="/post/:id" element={<PostPageDetails />} />
       <Route path="/update/:id" element={<PostPageUpdate />} />
+      <Route path="/account" element={<Account />} />
     </Routes>
     </AuthContextProvider>
     </BrowserRouter>

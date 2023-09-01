@@ -66,7 +66,7 @@ function ImageSquare({ post }) {
         paddingTop:"1rem",
         height:"5rem",
       }}>{caption}</Card.Title>
-      <Card.Text className="text-muted">Organizer: {user?.displayName}</Card.Text>
+      <Card.Text className="text-muted">Organizer: </Card.Text>
       <Card.Subtitle className="mb-2 text-muted">Dates: {startdate} to {enddate}</Card.Subtitle>
       <Card.Text>
         {comment}
