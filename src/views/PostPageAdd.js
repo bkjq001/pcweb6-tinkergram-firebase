@@ -10,6 +10,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 export default function PostPageAdd() {
   const [user, loading] = useAuthState(auth);
   const [comment, setComment] = useState("");
+  const [organizer, setOrganizer] = useState("");
   const [startdate, setStartdate] = useState("");
   const [enddate, setEnddate] = useState("");
   const [starttime, setStarttime] = useState("");
@@ -33,7 +34,7 @@ export default function PostPageAdd() {
     
     
   await addDoc(collection (db, "posts"), { 
-    comment, startdate, enddate, starttime, endtime, caption, location, requirements, image: imageUrl, imageName: image.name 
+    comment, organizer, startdate, enddate, starttime, endtime, caption, location, requirements, image: imageUrl, imageName: image.name 
     });
     navigate("/");
   }
@@ -60,6 +61,7 @@ export default function PostPageAdd() {
               onChange={(text) => setCaption(text.target.value)}
             />
           </Form.Group>
+          
           <Form.Group className="mb-3" controlId="comment">
             <Form.Label>Brief Description</Form.Label>
             <Form.Control
@@ -94,13 +96,23 @@ export default function PostPageAdd() {
           
           <Col md={4}>
           <Stack>
+          <Form.Group className="mb-3" controlId="organizer">
+            <Form.Label>Organizer</Form.Label>
+            <Form.Control
+              type="text"
+              maxlength="55"
+              placeholder=""
+              value={organizer}
+              onChange={(organizer) => setOrganizer(organizer.target.value)}
+            />
+          </Form.Group>
           <Form.Label>Upload Event Image</Form.Label>
           <Image className="mb-3"
             src={previewImage}
             style={{
               objectFit: "cover",
               width: "25rem",
-              height: "20rem",
+              height: "18rem",
             }}
             />
             <Form.Group className="mb-3" controlId="image">

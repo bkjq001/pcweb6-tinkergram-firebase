@@ -5,6 +5,7 @@ import PostPageHome from "./views/PostPageHome";
 import SignUpPage from "./views/SignUpPage";
 import PostPageAdd from "./views/PostPageAdd";
 import PostPageDetails from "./views/PostPageDetails";
+import PostPageRegister from "./views/PostPageRegister";
 import PostPageUpdate from "./views/PostPageUpdate";
 import Sitenav from "./components/Navbar";
 import Account from "./views/Account";
@@ -20,6 +21,7 @@ function App() {
     <Routes>
       <Route path="/" element={<PostPageHome />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/post-register/:id" element={<PostPageRegister />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/add" element={<PostPageAdd />} />
       <Route path="/post/:id" element={<PostPageDetails />} />

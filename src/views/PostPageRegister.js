@@ -72,29 +72,13 @@ export default function PostPageDetails() {
   return (
     <>
       <Container>
+      
         <Row style={{ marginTop: "2rem" }}>
           <Col md="6">
             <Image src={image} style={{ width: "100%" }} />
           </Col>
           <Col>
-            <Card>
-              <Card.Body>
-                <Card.Title>{caption}</Card.Title>
-                <Card.Text style={{ fontStyle: "italic" }}>{comment}</Card.Text>
-                <Card.Link href={`/update/${id}`}>Edit</Card.Link>
-                <Card.Link
-                  onClick={() => deletePost(id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  Delete
-                </Card.Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col md="6" className="mt-3">
-        <Form>
+          <Form>
               <h2 className="mt-3">Register For This Event</h2>
             <Form.Group className="mb-3" controlId="volunteerName">
             <Form.Label>Volunteer Name</Form.Label>
@@ -119,37 +103,27 @@ export default function PostPageDetails() {
           <Button variant="primary" size="lg" onClick={async (e) => addRegistration()}>
             Submit
           </Button>
-            </Form></Col>
+            </Form>
+            
+            
+            </Col>
         </Row>
-        <Row>
-          <Col md="6" className="mt-3">
-        <Form>
-              <h2 className="mt-3">Review Event</h2>
-            <Form.Group className="mb-3" controlId="reviewName">
-            <Form.Label>Reviewer's Name</Form.Label>
-            <Form.Control
-              type="text"
-              maxlength="55"
-              placeholder=""
-              value={reviewName}
-              onChange={(reviewName) => setReviewName(reviewName.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="reviewText">
-            <Form.Label>Review</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={5}
-              placeholder=""
-              value={reviewText}
-              onChange={(reviewText) => setReviewText(reviewText.target.value)}
-            />
-          </Form.Group>
-          <Button variant="primary" size="lg" onClick={async (e) => addReview()}>
-            Submit
-          </Button>
-            </Form></Col>
+        <Row className="mt-3">
+            <Card>
+              <Card.Body>
+                <Card.Title>{caption}</Card.Title>
+                <Card.Text style={{ fontStyle: "italic" }}>{comment}</Card.Text>
+                <Card.Link href={`/update/${id}`}>Edit</Card.Link>
+                <Card.Link
+                  onClick={() => deletePost(id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  Delete
+                </Card.Link>
+              </Card.Body>
+            </Card>
         </Row>
+        
       </Container>
     </>
   );

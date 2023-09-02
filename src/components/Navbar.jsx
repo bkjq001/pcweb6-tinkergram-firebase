@@ -25,7 +25,11 @@ return (
     <Container>
       <Navbar.Brand href="/">⭕ The Giving Circle</Navbar.Brand>
       <Nav>
-        {user?.displayName ? (<Nav.Link onClick={() => signOut(auth)} to={"/"} >Sign Out <FaArrowRightFromBracket /></Nav.Link>) : (<Link to ='/login'>Sign In</Link>)}
+      {user?.displayName ? (      
+      <Nav.Link href="/add">Add Event</Nav.Link>) : (null)}
+        {user?.displayName ? (
+        <Nav.Link onClick={() => signOut(auth)} to={"/"} >Sign Out <FaArrowRightFromBracket /></Nav.Link>
+        ) : (<Link to ='/login'>Sign In</Link>)}
       </Nav>
     </Container>
   </Navbar>

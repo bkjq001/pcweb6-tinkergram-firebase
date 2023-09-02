@@ -30,6 +30,7 @@ export default function PostPageHome() {
     <>
       
       <Container>
+        <h1 className="mt-3">All Events</h1>
         <Row>
           <ImagesRow />
         </Row>
@@ -42,7 +43,7 @@ export default function PostPageHome() {
 
 function ImageSquare({ post }) {
   const [user] = useAuthState(auth);
-  const { image, id, caption, startdate, enddate, comment  } = post;
+  const { image, organizer, id, caption, startdate, enddate, comment  } = post;
   return (
     <Card style={{
       width: "22rem",
@@ -66,21 +67,21 @@ function ImageSquare({ post }) {
         paddingTop:"1rem",
         height:"5rem",
       }}>{caption}</Card.Title>
-      <Card.Text className="text-muted">Organizer: </Card.Text>
+      <Card.Text className="text-muted">Organizer: {organizer}</Card.Text>
       <Card.Subtitle className="mb-2 text-muted">Dates: {startdate} to {enddate}</Card.Subtitle>
       <Card.Text>
         {comment}
       </Card.Text>
 
-      <Link
-      to={`post/${id}`}
-    >
+      
       <Nav className="justify-content-end">
-      <Button variant="primary">
-        Read More
+      <Button href={`/update/${id}`} variant="primary">
+        Edit
+      </Button> &nbsp;
+      <Button href={`/post-register/${id}`} variant="primary">
+        Learn More
       </Button>
       </Nav>
-    </Link>
     </Card.Body>
   </Card>
 
