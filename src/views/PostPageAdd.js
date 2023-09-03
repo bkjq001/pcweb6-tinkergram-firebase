@@ -39,6 +39,8 @@ export default function PostPageAdd() {
     navigate("/");
   }
 
+  
+
   //we want to make sure that only login users are able to add a post.
   useEffect(() => {
     if (loading) return;

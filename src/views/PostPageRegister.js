@@ -14,6 +14,11 @@ export default function PostPageDetails() {
   const [volunteerContact, setVolunteerContact] = useState("");
   const [caption, setCaption] = useState("");
   const [comment, setComment] = useState("");
+  const [startdate, setStartdate] = useState("");
+  const [enddate, setEnddate] = useState("");
+  const [organizer, setOrganizer] = useState("");
+  const [location, setLocation] = useState("");
+  const [requirements, setRequirements] = useState("");
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
   const params = useParams();
@@ -41,6 +46,11 @@ export default function PostPageDetails() {
     const postDocument = await getDoc(doc(db, "posts", id));
     const post = postDocument.data();
     setCaption(post.caption);
+    setStartdate(post.startdate);
+    setEnddate(post.enddate);
+    setOrganizer(post.organizer);
+    setLocation(post.location);
+    setRequirements(post.requirements);
     setComment(post.comment);
     setImage(post.image);
     setImageName(post.imageName);
@@ -65,7 +75,7 @@ export default function PostPageDetails() {
 
   useEffect(() => {
     if(loading) return;
-    if(!user) navigate("/login");
+    //if(!user) navigate("/login");
     getPost(id);
   }, [id, loading, user, navigate]);
 
@@ -111,15 +121,21 @@ export default function PostPageDetails() {
         <Row className="mt-3">
             <Card>
               <Card.Body>
-                <Card.Title>{caption}</Card.Title>
+                <Card.Title><h3>{caption}</h3></Card.Title>
+                <Card.Title><h6>Organized by: {organizer}</h6></Card.Title>
+                <Card.Text>From {startdate} to {enddate}</Card.Text>
+                <Card.Text>Location: {location}</Card.Text>
                 <Card.Text style={{ fontStyle: "italic" }}>{comment}</Card.Text>
-                <Card.Link href={`/update/${id}`}>Edit</Card.Link>
+                <Card.Text>{requirements}</Card.Text>
+                {user?.displayName ? (      
+                <Card.Link href={`/update/${id}`}>Edit</Card.Link>) : (null)}
+                {user?.displayName ? (      
                 <Card.Link
-                  onClick={() => deletePost(id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  Delete
-                </Card.Link>
+                onClick={() => deletePost(id)}
+                style={{ cursor: "pointer" }}
+              >
+                Delete
+              </Card.Link>) : (null)}
               </Card.Body>
             </Card>
         </Row>

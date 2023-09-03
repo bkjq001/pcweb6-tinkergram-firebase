@@ -75,12 +75,17 @@ function ImageSquare({ post }) {
 
       
       <Nav className="justify-content-end">
+      {user?.displayName ? (      
       <Button href={`/update/${id}`} variant="primary">
-        Edit
-      </Button> &nbsp;
-      <Button href={`/post-register/${id}`} variant="primary">
+      Edit
+    </Button>) : (<Button href={`/post-register/${id}`} variant="primary">
         Learn More
-      </Button>
+      </Button>)}
+       &nbsp;
+       {user?.displayName ? (      
+      <Button href={`/post-register/${id}`} variant="primary">
+      Event Details
+    </Button>) : (null)}
       </Nav>
     </Card.Body>
   </Card>

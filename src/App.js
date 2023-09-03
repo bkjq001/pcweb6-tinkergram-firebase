@@ -25,7 +25,7 @@ function App() {
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/add" element={<PostPageAdd />} />
       <Route path="/post/:id" element={<PostPageDetails />} />
-      <Route path="/update/:id" element={<PostPageUpdate />} />
+      <Route path="/update/:id" element={<Protected><PostPageUpdate /></Protected>} />
       <Route path="/account" element={<Account />} />
     </Routes>
     </AuthContextProvider>
