@@ -27,6 +27,8 @@ return (
       <Nav>
       {user?.displayName ? (      
       <Nav.Link href="/add">Add Event</Nav.Link>) : (null)}
+      {user?.displayName ? (      
+      <Nav.Link href="/account">My Account</Nav.Link>) : (null)}
         {user?.displayName ? (
         <Nav.Link onClick={() => signOut(auth)} to={"/"} >Sign Out <FaArrowRightFromBracket /></Nav.Link>
         ) : (<Link to ='/login'>Sign In</Link>)}

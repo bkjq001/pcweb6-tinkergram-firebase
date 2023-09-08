@@ -21,6 +21,7 @@ export default function PostPageAdd() {
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png");
   const navigate = useNavigate();
+  
 
   async function addPost() {
 
@@ -34,7 +35,7 @@ export default function PostPageAdd() {
     
     
   await addDoc(collection (db, "posts"), { 
-    comment, organizer, startdate, enddate, starttime, endtime, caption, location, requirements, image: imageUrl, imageName: image.name 
+    userId: user?.uid, comment, organizer, startdate, enddate, starttime, endtime, caption, location, requirements, image: imageUrl, imageName: image.name 
     });
     navigate("/");
   }
