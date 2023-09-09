@@ -67,7 +67,7 @@ function ImageSquare({ post }) {
         paddingTop:"1rem",
         height:"5rem",
       }}>{caption}</Card.Title>
-      <Card.Text className="text-muted">Organizer: {organizer}</Card.Text>
+      <Card.Text className="text-muted">Organizer: {organizer} <br/>uid: {post.userId}</Card.Text>
       <Card.Subtitle className="mb-2 text-muted">Dates: {startdate} to {enddate}</Card.Subtitle>
       <Card.Text>
         {comment}
@@ -75,17 +75,13 @@ function ImageSquare({ post }) {
 
       
       <Nav className="justify-content-end">
-      {user?.displayName ? (      
-      <Button href={`/update/${id}`} variant="primary">
-      Edit
-    </Button>) : (<Button href={`/post-register/${id}`} variant="primary">
-        Learn More
-      </Button>)}
-       &nbsp;
+     
        {user?.displayName ? (      
       <Button href={`/post-register/${id}`} variant="primary">
       Event Details
-    </Button>) : (null)}
+    </Button>) : (<Button href={`/post-register/${id}`} variant="primary">
+        Learn More
+      </Button>)}
       </Nav>
     </Card.Body>
   </Card>

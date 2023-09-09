@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, } from "react-bootstrap";
+import { Card, Container, Row, Col, Button, Nav, } from "react-bootstrap";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { query, doc, getDocs, collection, where } from 'firebase/firestore';
@@ -46,20 +46,37 @@ useEffect(() => {
         }, [user]);
 
 
+
   return (
     <Container>
         <Row>
             <Col md={4}>
             <h1 className="my-3">Account</h1>
             <p>Welcome, {user?.displayName}</p>
+            <p>{user?.email}</p>
+            <p>{user.uid}</p>
             <Button variant="primary" onClick={handleSignOut}>Logout</Button>
             </Col>
         </Row>
-        <div>
+        <hr />
+        <h2>My Events</h2>
+        <Col>
         {postLists.map((post) => {
-            return <li key={post.id}>{post.caption}</li>
+            const { id, caption, image } = post;
+            return  <Card style={{ width: '18rem', marginBottom: '1rem', 
+            }}>
+            <Card.Img variant="top" src={image} />
+            <Card.Body>
+              <Card.Title>{caption}</Card.Title>
+              <Card.Text>
+                
+              </Card.Text>
+              <Button href={`/update/${id}`} variant="primary">Edit</Button>
+            </Card.Body>
+          </Card>
+          
         })}
-      </div>
+      </Col>
       </Container>
       
   );

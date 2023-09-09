@@ -128,13 +128,13 @@ export default function PostPageDetails() {
                 <Card.Text style={{ fontStyle: "italic" }}>{comment}</Card.Text>
                 <Card.Text>{requirements}</Card.Text>
                 {user?.displayName ? (      
-                <Card.Link href={`/update/${id}`}>Edit</Card.Link>) : (null)}
+                <Card.Link href={`/update/${id}`}></Card.Link>) : (null)}
                 {user?.displayName ? (      
                 <Card.Link
                 onClick={() => deletePost(id)}
                 style={{ cursor: "pointer" }}
               >
-                Delete
+                
               </Card.Link>) : (null)}
               </Card.Body>
             </Card>
